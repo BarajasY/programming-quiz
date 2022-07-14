@@ -93,3 +93,42 @@
 .submit_answer:hover {
     background: rgb(68, 200, 150)
 }
+
+.intro_container {
+    width: 80%;
+    border: 2px solid black;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins';
+}
+
+.header h1 {
+    color: #00D8FF;
+    font-size: 36px;
+}
+
+.header p {
+    font-size: 20px;
+}
+
+.header p span:nth-child(1) {
+    color: #00D8FF;
+}
+
+.header p span:nth-child(2) {
+    color: #EFD81D;
+}
+
+.footer button {
+    margin-top: 20px;
+    background: none;
+    padding: 10px 20px;
+    font-size: 20px;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.footer button:hover {
+    background: black;
+    color: white;
+}

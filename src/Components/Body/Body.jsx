@@ -8,6 +8,7 @@ const Body = () => {
     const [IsItCorrect, setIsItCorrect] = useState(false)
     const [Questions, setQuestions] = useState([])
     const [CorrectAnswers, setCorrectAnswers] = useState(0)
+    const [ShowIntro, setShowIntro] = useState(true)
 
     const handleCorrect = () => {
         setIsItCorrect(true)
@@ -18,11 +19,15 @@ const Body = () => {
     }
 
     const handleSubmit = () => {
-        const newCount = Count + 1
-        setCount(newCount)
+        setCount(Count + 1)
         if (IsItCorrect) {
             setCorrectAnswers(CorrectAnswers + 1)
         }
+        console.log(Count)
+    }
+
+    const ShowQuiz = () => {
+        setShowIntro(false);
     }
 
     useEffect(() => {
@@ -36,6 +41,27 @@ const Body = () => {
 
         getQuestions()
     }, [Count])
+
+    if (ShowIntro) {
+        return (
+            <>
+                <div className="body_container">
+                    <div className="body_content">
+                        <div className="intro_container">
+                            <div className="header">
+                                <h1>React Programming Quiz</h1>
+                                <p>This is a programming quiz designed to further increase the general knowledge of <span>React</span>/<span>Javascript</span> of those who visit this site.</p>
+                            </div>
+                            <div className="footer">
+                                <button onClick={ShowQuiz}>Start Quiz</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
+    }
+
 
     return (
         <div className="body_container">
