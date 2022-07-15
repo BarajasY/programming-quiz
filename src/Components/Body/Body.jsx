@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './Body.css';
 import { db } from '../../Firebase';
-import { getDocs, collection, query, where } from 'firebase/firestore'
+import { getDocs, collection } from 'firebase/firestore'
 
 const Body = () => {
     const [Count, setCount] = useState(0)
     const [IsItCorrect, setIsItCorrect] = useState(false)
     const [Questions, setQuestions] = useState([])
+    const [FilteredQuestions, setFilteredQuestions] = useState([])
     const [CorrectAnswers, setCorrectAnswers] = useState(0)
     const [ShowIntro, setShowIntro] = useState(true)
 
+    // Functions to change question and add a counter to the correct answers.
     const handleCorrect = () => {
         setIsItCorrect(true)
     }
@@ -23,24 +25,37 @@ const Body = () => {
         if (IsItCorrect) {
             setCorrectAnswers(CorrectAnswers + 1)
         }
-        console.log(Count)
     }
 
     const ShowQuiz = () => {
         setShowIntro(false);
+        FilterQuestions()
     }
 
-    useEffect(() => {
-        const getQuestions = () => {
-            const q = query(collection(db, 'questions'), where("Id", "==", Count))
-            getDocs(q).then(response => {
-                const data = response.docs.map(doc => ({ data: doc.data(), id: doc.id }));
-                setQuestions(data)
-            })
-        }
+    // Function to get all the questions from the database. 
+    const getQuestions = () => {
+        const QuestionsCollectionRef = collection(db, 'questions')
+        getDocs(QuestionsCollectionRef).then(response => {
+            const data = response.docs.map(doc => ({ data: doc.data(), id: doc.id }));
+            setQuestions(data)
+        })
+    }
 
+    // Function to filter the questions stored in the Questions useState in order to only show 1 question at time.
+    const FilterQuestions = () => {
+        const Filter = Questions.filter(filter => filter.data.Id === Count)
+        setFilteredQuestions(Filter)
+    }
+
+
+    useEffect(() => {
         getQuestions()
+    }, [])
+
+    useEffect(() => {
+        FilterQuestions()
     }, [Count])
+
 
     if (ShowIntro) {
         return (
@@ -62,11 +77,10 @@ const Body = () => {
         )
     }
 
-
     return (
         <div className="body_container">
             <div className="body_content">
-                {Questions.map((data) => (
+                {FilteredQuestions.map((data) => (
                     <div className="question_container" key="1">
                         <div className="question_header">
                             <div className="question_title">
