@@ -12,7 +12,7 @@ const Body = () => {
     const [ShowIntro, setShowIntro] = useState(true)
     const [ShowResults, setShowResults] = useState(false)
 
-    // Functions to change question and add a counter to the correct answers.
+    // Functions to change question and to add a counter to the correct answers.
     const handleCorrect = () => {
         setIsItCorrect(true)
     }
