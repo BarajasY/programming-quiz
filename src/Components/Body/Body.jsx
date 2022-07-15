@@ -8,8 +8,9 @@ const Body = () => {
     const [IsItCorrect, setIsItCorrect] = useState(false)
     const [Questions, setQuestions] = useState([])
     const [FilteredQuestions, setFilteredQuestions] = useState([])
-    const [CorrectAnswers, setCorrectAnswers] = useState(0)
+    const [CorrectAnswers, setCorrectAnswers] = useState(1)
     const [ShowIntro, setShowIntro] = useState(true)
+    const [ShowResults, setShowResults] = useState(false)
 
     // Functions to change question and add a counter to the correct answers.
     const handleCorrect = () => {
@@ -25,11 +26,20 @@ const Body = () => {
         if (IsItCorrect) {
             setCorrectAnswers(CorrectAnswers + 1)
         }
+        if (Questions.length - 1 === Count) {
+            setShowResults(true);
+        }
     }
 
     const ShowQuiz = () => {
         setShowIntro(false);
         FilterQuestions()
+    }
+
+    const handleRepeat = () => {
+        setCount(0);
+        setCorrectAnswers(0);
+        setShowResults(false);
     }
 
     // Function to get all the questions from the database. 
@@ -69,6 +79,26 @@ const Body = () => {
                             </div>
                             <div className="footer">
                                 <button onClick={ShowQuiz}>Start Quiz</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </>
+        )
+    }
+
+    if (ShowResults) {
+        return (
+            <>
+                <div className="body_container">
+                    <div className="body_content">
+                        <div className="results_container">
+                            <div className="results_header">
+                                <p>Your results were:</p>
+                                <h1><span>{CorrectAnswers}</span> correct out of {Questions.length}</h1>
+                            </div>
+                            <div className="results_footer">
+                                <button onClick={handleRepeat}>Repeat the test</button>
                             </div>
                         </div>
                     </div>

@@ -132,3 +132,58 @@
     background: black;
     color: white;
 }
+
+.results_container {
+    border: 2px solid black;
+    padding: 50px;
+    font-family: 'Poppins';
+    box-shadow: 2px 2px 5px black;
+}
+
+.results_header p {
+    text-align: center;
+    font-size: 20px;
+}
+
+.results_header h1 {
+    font-size: 32px;
+    text-align: center;
+}
+
+.results_header h1 span {
+    color: #00D8FF;
+}
+
+.results_footer {
+    display: flex;
+    justify-content: center;
+}
+
+.results_footer button {
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 20px;
+    background: none;
+    border: 2px solid black;
+    transition: .5s;
+    cursor: pointer;
+}
+
+.results_footer button:hover {
+    background: black;
+    color: white;
+}
+
+@media only screen and (max-width: 991px) {
+    .body_content {
+        width: 100%;
+    }
+
+    .question_container {
+        width: 95%;
+    }
+
+    .question_answer {
+        width: 90%;
+    }
+}
