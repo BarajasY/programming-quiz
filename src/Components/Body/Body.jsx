@@ -63,8 +63,12 @@ const Body = () => {
     }, [])
 
     useEffect(() => {
+        const FilterQuestions = () => {
+            const Filter = Questions.filter(filter => filter.data.Id === Count)
+            setFilteredQuestions(Filter)
+        }
         FilterQuestions()
-    }, [Count])
+    }, [Count, Questions])
 
 
     if (ShowIntro) {
