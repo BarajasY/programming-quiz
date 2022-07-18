@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './Body.css';
 import { db } from '../../Firebase';
 import { getDocs, collection } from 'firebase/firestore'
+import { motion } from 'framer-motion';
 
 const Body = () => {
     const [Count, setCount] = useState(0)
@@ -76,7 +77,7 @@ const Body = () => {
             <>
                 <div className="body_container">
                     <div className="body_content">
-                        <div className="intro_container">
+                        <motion.div className="intro_container" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 2 }}>
                             <div className="header">
                                 <h1>React Programming Quiz</h1>
                                 <p>This is a programming quiz designed to further increase the general knowledge of <span>React</span>/<span>Javascript</span> of those who visit this site.</p>
@@ -84,7 +85,7 @@ const Body = () => {
                             <div className="footer">
                                 <button onClick={ShowQuiz}>Start Quiz</button>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
             </>
@@ -95,17 +96,17 @@ const Body = () => {
         return (
             <>
                 <div className="body_container">
-                    <div className="body_content">
+                    <motion.div className="body_content" initial={{ x: 2000 }} animate={{ x: 0 }} transition={{ duration: 1, type: "spring" }}>
                         <div className="results_container">
-                            <div className="results_header">
+                            <motion.div className="results_header" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: .5 }}>
                                 <p>Your results were:</p>
                                 <h1><span>{CorrectAnswers}</span> correct out of {Questions.length}</h1>
-                            </div>
-                            <div className="results_footer">
+                            </motion.div>
+                            <motion.div className="results_footer" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 1.5 }}>
                                 <button onClick={handleRepeat}>Repeat the test</button>
-                            </div>
+                            </motion.div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </>
         )
@@ -113,7 +114,7 @@ const Body = () => {
 
     return (
         <div className="body_container">
-            <div className="body_content">
+            <motion.div className="body_content" initial={{ x: 2000 }} animate={{ x: 0 }} transition={{ duration: 1, type: "spring" }}>
                 {FilteredQuestions.map((data) => (
                     <div className="question_container" key="1">
                         <div className="question_header">
@@ -136,7 +137,7 @@ const Body = () => {
                 <div className="question_answer_submit">
                     <button onClick={handleSubmit} className="submit_answer">Submit</button>
                 </div>
-            </div>
+            </motion.div>
         </div>
     )
 }
